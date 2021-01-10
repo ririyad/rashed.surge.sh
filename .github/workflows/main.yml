@@ -1,0 +1,19 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy Site
+on:
+  push:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Deploy to surge
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install surge and fire deployment 
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12
+      - run: npm install -g surge
+      - run: surge ./ ${{ secrets.1b3fa6b92de539dd6a348621cc24fa4f }} --token ${{ secrets.1b3fa6b92de539dd6a348621cc24fa4f }}
